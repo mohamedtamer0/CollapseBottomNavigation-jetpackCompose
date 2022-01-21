@@ -87,7 +87,7 @@ fun BottomCollapse() {
                         modifier = Modifier.fillMaxWidth()
                     )
                 },
-                backgroundColor = Purple500,
+                backgroundColor = Color.Black,
                 elevation = AppBarDefaults.TopAppBarElevation
             )
         },
@@ -110,7 +110,7 @@ fun BottomCollapse() {
                             .fillMaxWidth()
                             .height(100.dp)
                             .padding(10.dp, 5.dp, 10.dp, 5.dp)
-                            .background(Color.White),
+                            .background(Color.Black),
                         elevation = 10.dp,
                         shape = RoundedCornerShape(5.dp)
                     ) {
@@ -134,7 +134,7 @@ fun BottomCollapse() {
                                 Column {
                                     Text(
                                         text = "Sample Test",
-                                        color = Color.Black,
+                                        color = Color.White,
                                         fontSize = 16.sp,
                                         fontWeight = FontWeight.Bold
                                     )
