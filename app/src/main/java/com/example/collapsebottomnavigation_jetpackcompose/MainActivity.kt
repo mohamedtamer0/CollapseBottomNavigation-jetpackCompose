@@ -167,7 +167,7 @@ fun AppBottomNavigation(
             BottomNavigationItem(
                 selected = false,
                 onClick = {
-                    //Handle bottom navigation item click
+                    //Handle bottom navigation item click!!!
                 },
                 icon = {
                     Icon(
