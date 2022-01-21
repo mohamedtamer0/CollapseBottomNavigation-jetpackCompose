@@ -3,27 +3,34 @@ package com.example.collapsebottomnavigation_jetpackcompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
 import androidx.compose.ui.input.nestedscroll.nestedScroll
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.collapsebottomnavigation_jetpackcompose.navigation.BottomScreen
@@ -79,7 +86,8 @@ fun BottomCollapse() {
                         textAlign = TextAlign.Center,
                         modifier = Modifier.fillMaxWidth()
                     )
-                }, backgroundColor = Purple500,
+                },
+                backgroundColor = Purple500,
                 elevation = AppBarDefaults.TopAppBarElevation
             )
         },
@@ -88,7 +96,7 @@ fun BottomCollapse() {
                 modifier = Modifier
                     .height(bottomBarHeight)
                     .offset {
-                        IntOffset(0, -bottomBarOffsetHeightPx.value.roundToInt())
+                        IntOffset(x = 0, y = -bottomBarOffsetHeightPx.value.roundToInt())
                     }
             ) {
                 AppBottomNavigation(navController, bottomNavigationItems)
@@ -102,16 +110,50 @@ fun BottomCollapse() {
                             .fillMaxWidth()
                             .height(100.dp)
                             .padding(10.dp, 5.dp, 10.dp, 5.dp)
-                            .background(Color.White)
+                            .background(Color.White),
+                        elevation = 10.dp,
+                        shape = RoundedCornerShape(5.dp)
                     ) {
+                        Column(
+                            modifier = Modifier.padding(10.dp)
+                        ) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Image(
+                                    painter = painterResource(id = R.drawable.dog),
+                                    contentDescription = "Image",
+                                    contentScale = ContentScale.Crop,
+                                    modifier = Modifier
+                                        .size(60.dp)
+                                        .clip(CircleShape)
+                                )
 
+                                Spacer(modifier = Modifier.padding(5.dp))
+
+                                Column {
+                                    Text(
+                                        text = "Sample Test",
+                                        color = Color.Black,
+                                        fontSize = 16.sp,
+                                        fontWeight = FontWeight.Bold
+                                    )
+
+                                    Spacer(modifier = Modifier.padding(2.dp))
+
+                                    Text(
+                                        text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+                                        color = Color.Gray,
+                                        fontSize = 12.sp
+                                    )
+                                }
+                            }
+                        }
                     }
                 }
             }
         }
     )
-
-
 }
 
 
@@ -120,8 +162,30 @@ fun AppBottomNavigation(
     navController: NavHostController,
     bottomNavigationItems: List<BottomScreen>
 ) {
-
+    BottomNavigation {
+        bottomNavigationItems.forEach { bottomScreen ->
+            BottomNavigationItem(
+                selected = false,
+                onClick = {
+                    //Handle bottom navigation item click
+                },
+                icon = {
+                    Icon(
+                        bottomScreen.icon,
+                        contentDescription = null
+                    )
+                },
+                label = {
+                    Text(
+                        text = bottomScreen.title
+                    )
+                },
+                alwaysShowLabel = false
+            )
+        }
+    }
 }
+
 
 
 
